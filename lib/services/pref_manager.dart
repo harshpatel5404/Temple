@@ -42,7 +42,6 @@ Future<void> removeusernumber() async {
 
 Future<String?> removeuserid() async {
   final prefs = await SharedPreferences.getInstance();
-
   await prefs.remove('Userid');
 }
 

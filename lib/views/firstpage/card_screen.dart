@@ -11,9 +11,11 @@ import 'package:jiffy/jiffy.dart';
 import 'package:temple/constant/color.dart';
 import 'package:temple/services/api/category_service.dart';
 import 'package:temple/services/api/registration_service.dart';
+import 'package:temple/services/api/update_dailytask.dart';
 import 'package:temple/services/pref_manager.dart';
 import 'package:temple/views/firstpage/card_screen_controller.dart';
 import 'package:temple/views/home/controller.dart/Home_controller.dart';
+import 'package:temple/views/home/home.dart';
 import 'package:temple/views/member/controller/get_member_controller.dart';
 import 'package:temple/widget/app_drawer.dart';
 
@@ -451,9 +453,7 @@ class _Card_ScreenState extends State<Card_Screen> {
                                         children: [
                                           CircleAvatar(
                                             radius: 38,
-                                            backgroundColor: Color(fromHex(
-                                                niyamController.niyamList[index]
-                                                    ["color"])),
+                                            backgroundColor: Color(0xffFFF7DE),
                                             child: Image(
                                               image: AssetImage(niyamController
                                                   .niyamList[index]["image"]),
@@ -558,7 +558,12 @@ class _Card_ScreenState extends State<Card_Screen> {
                     GestureDetector(
                       onTap: () {
                         setState(() {
-                          currentcategory = "સદગ્રંથ વાંચન";
+                          getbymainCategory("sadgranth").then((value) {
+                            getcarddata();
+                          });
+                          // currentcategory = "સદગ્રંથ વાંચન";
+                          currentcategory = "sadgranth";
+
                           tabIndex = 1;
                         });
                       },
@@ -588,46 +593,16 @@ class _Card_ScreenState extends State<Card_Screen> {
                       ),
                     ),
                     const SizedBox(width: 8),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          getbymainCategory("niyam").then((value) {
-                            getcarddata();
-                          });
-                          currentcategory = "niyam";
-                          tabIndex = 2;
-                        });
-                      },
-                      child: Container(
-                        height: 31,
-                        width: 135,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(7),
-                          color: tabIndex == 2
-                              ? const Color(0xff008ABD)
-                              : const Color(0xffEDEDED),
-                        ),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            "નિત્ય નિયમ",
-                            style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                                color:
-                                    tabIndex == 2 ? Colors.white : Colors.black,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
                     const SizedBox(width: 8),
                     GestureDetector(
                       onTap: () {
                         setState(() {
-                          currentcategory = "કંઠસ્થ ના નિયમો";
+                          getbymainCategory("kanthsth").then((value) {
+                            getcarddata();
+                          });
+                          currentcategory = "kanthsth";
+
+                          // currentcategory = "કંઠસ્થ ના નિયમો";
                           tabIndex = 3;
                         });
                         // _pageController.jumpToPage(2);
@@ -661,8 +636,13 @@ class _Card_ScreenState extends State<Card_Screen> {
                     GestureDetector(
                       onTap: () {
                         setState(() {
+                          getbymainCategory("vachan").then((value) {
+                            getcarddata();
+                          });
                           tabIndex = 4;
-                          currentcategory = "વાંચન ના નિયમો";
+                          currentcategory = "vachan";
+
+                          // currentcategory = "વાંચન ના નિયમો";
                         });
                         // _pageController.jumpToPage(4);
                       },
@@ -716,10 +696,13 @@ class _Card_ScreenState extends State<Card_Screen> {
               child: FloatingActionButton.extended(
                 backgroundColor: kPrimarycolor,
                 onPressed: () async {
+                  Usertaskcontroller usertaskcontroller = Get.find();
+                  usertaskcontroller.usertasklist.forEach((element) {
+                    deletetask(element.id);
+                  });
                   for (var i = 0; i < niyamController.niyamList.length; i++) {
                     await addTask(niyamController.niyamList[i]);
                   }
-                  Usertaskcontroller usertaskcontroller = Get.find();
                   await getuserid();
                   usertaskcontroller.getusertask(userid!);
                   Get.offAll(AppDrawer());
@@ -990,7 +973,7 @@ class _CardSliderState extends State<CardSlider> {
               child: InkWell(
                 onTap: () {
                   dainikPopupController.totalTarget.value = 0;
-                  cardinfo.maincategory =="niyam"
+                  cardinfo.maincategory == "niyam"
                       ? dainkLaxDialog(context, days, false, cardinfo, false)
                       : dainkLaxDialog(context, days, false, cardinfo, true);
 
@@ -1003,7 +986,7 @@ class _CardSliderState extends State<CardSlider> {
                     height: Get.height * 0.25,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Color(fromHex(cardinfo.color)),
+                      color: Color(0xffFFF7DE),
                     ),
                     child: Column(
                       children: [

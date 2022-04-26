@@ -1,7 +1,8 @@
 import 'dart:async';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import 'package:temple/services/api/api_services.dart';
-
 import '../pref_manager.dart';
 
 String? usernumber;
@@ -9,7 +10,6 @@ String? userid;
 bool? login;
 Future registerUser(Map data) async {
   var dio = Dio();
-
   var formData = data["image"] != ""
       ? FormData.fromMap({
           "number": data["number"],
@@ -50,4 +50,22 @@ Future registerUser(Map data) async {
   } catch (e) {
     print(e);
   }
+}
+
+
+
+Future deleteUser(id) async {
+  final response = await http
+      .post(Uri.parse(baseUrl + 'deleteUser'),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: json.encode({"id": id}),
+          encoding: Encoding.getByName('utf-8'))
+      .then((response) {
+    if (response.statusCode == 200) {
+      var jsondata = json.decode(response.body);
+      print(jsondata);
+    }
+  });
 }

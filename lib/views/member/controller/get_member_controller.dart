@@ -9,7 +9,7 @@ class Getallmembercontroller extends GetxController {
 
   Future getmemberdata() async {
     memberlist.clear();
-    print("usernum is $usernumber");
+    await getusernumber();
     if (usernumber != null) {
       UserModel? memberdata = await Getallmember(usernumber);
       if (memberdata != null) {

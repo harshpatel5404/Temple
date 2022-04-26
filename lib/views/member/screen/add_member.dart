@@ -11,11 +11,14 @@ import 'package:temple/views/firstpage/card_screen.dart';
 import 'package:temple/views/home/controller.dart/Home_controller.dart';
 import 'package:temple/views/home/home.dart';
 import 'package:temple/views/member/controller/get_member_controller.dart';
+import 'package:temple/views/otp/otp_screen.dart';
 import 'package:temple/views/registration/registration_screen.dart';
 import 'package:temple/widget/app_drawer.dart';
 
 class SelectMember extends StatefulWidget {
-  const SelectMember({Key? key, }) : super(key: key);
+  const SelectMember({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<SelectMember> createState() => _SelectMemberState();
@@ -26,7 +29,6 @@ Getallmembercontroller getallmembercontroller =
 Usertaskcontroller usertaskcontroller = Get.find();
 
 bool status = false;
-
 List membercolor = [
   // {
   //   "color": Color(0xff4CADCE),
@@ -53,6 +55,7 @@ class _SelectMemberState extends State<SelectMember> {
 
   @override
   Widget build(BuildContext context) {
+    // getallmembercontroller.getmemberdata();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -188,11 +191,29 @@ class _SelectMemberState extends State<SelectMember> {
                                               ],
                                             ),
                                           ),
-                                          const Align(
-                                            alignment: Alignment.topRight,
-                                            child: Padding(
-                                              padding: EdgeInsets.all(8.0),
-                                              child: Icon(Icons.cancel_rounded),
+                                          InkWell(
+                                            onTap: () {
+                                              var id = getallmembercontroller
+                                                  .memberlist[index].id;
+                                              if (getallmembercontroller
+                                                      .memberlist.length ==
+                                                  1) {
+                                                removelogin();
+                                                removeuserid();
+                                                removeusernumber();
+                                                Get.off(OtpScreen());
+                                              }
+                                              getallmembercontroller.memberlist
+                                                  .removeAt(index);
+                                              deleteUser(id);
+                                            },
+                                            child: const Align(
+                                              alignment: Alignment.topRight,
+                                              child: Padding(
+                                                padding: EdgeInsets.all(8.0),
+                                                child:
+                                                    Icon(Icons.cancel_rounded),
+                                              ),
                                             ),
                                           ),
                                         ],

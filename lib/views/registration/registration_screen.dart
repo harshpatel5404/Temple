@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -454,15 +455,23 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                               .then((value) {
                             print("member list length");
                             print(getallmembercontroller.memberlist.length);
-                            if (getallmembercontroller.memberlist.length != 0) {
+                            if (getallmembercontroller.memberlist.length != 1) {
                               Get.off(SelectMember());
                             } else {
                               Get.off(Card_Screen(userid: userid));
                             }
                           });
+                        } else {
+                          Fluttertoast.showToast(
+                              msg: "Your Member Limit Over!",
+                              backgroundColor: Colors.red,
+                              gravity: ToastGravity.BOTTOM);
                         }
                       } else {
-                        scaffoldMessage(context, "Please select the date");
+                        Fluttertoast.showToast(
+                            msg: "Please select the date",
+                            backgroundColor: Colors.red,
+                            gravity: ToastGravity.BOTTOM);
                       }
                     }
                   },

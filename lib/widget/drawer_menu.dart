@@ -4,6 +4,9 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:temple/constant/color.dart';
+import 'package:temple/services/api/registration_service.dart';
+import 'package:temple/services/pref_manager.dart';
+import 'package:temple/views/member/controller/get_member_controller.dart';
 import 'package:temple/views/member/screen/add_member.dart';
 
 class DrawerMenu extends StatefulWidget {
@@ -14,6 +17,8 @@ class DrawerMenu extends StatefulWidget {
 }
 
 class _DrawerMenuState extends State<DrawerMenu> {
+  Getallmembercontroller getallmembercontroller =
+      Get.put(Getallmembercontroller());
   // bool isSelected = false;
   var onTapIndex = 0;
   List menuTitle = [
@@ -67,8 +72,10 @@ class _DrawerMenuState extends State<DrawerMenu> {
               children: [
                 SizedBox(width: 10),
                 InkWell(
-                  onTap: () {
-                    Get.offAll(SelectMember());
+                  onTap: () async {
+                    usernumber = await getusernumber();
+                    getallmembercontroller.getmemberdata();
+                    Get.to(SelectMember());
                   },
                   child: Container(
                     height: 45,

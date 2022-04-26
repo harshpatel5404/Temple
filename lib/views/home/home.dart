@@ -11,6 +11,8 @@ import 'package:temple/services/api/registration_service.dart';
 import 'package:temple/services/api/update_dailytask.dart';
 import 'package:temple/services/pref_manager.dart';
 import 'package:temple/views/achievement/achievement.dart';
+import 'package:temple/views/firstpage/card_screen.dart';
+import 'package:temple/views/firstpage/card_screen_controller.dart';
 import 'package:temple/views/home/controller.dart/Home_controller.dart';
 import 'package:temple/views/mala_screen/mala_screen.dart';
 import 'package:temple/views/mala_screen/yes_no.dart';
@@ -36,6 +38,16 @@ class _HomePageState extends State<HomePage> {
     colorNew = colorNew.replaceAll('#', '');
     int colorInt = int.parse(colorNew);
     return colorInt;
+  }
+
+  Future getnum() async {
+    await getusernumber();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getnum();
   }
 
   @override
@@ -250,7 +262,29 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Bounce(
                     duration: const Duration(milliseconds: 110),
-                    onPressed: () {},
+                    onPressed: () {
+                      NiyamController niyamController =
+                          Get.put(NiyamController());
+                      niyamController.niyamList.clear();
+                      usertaskcontroller.usertasklist.forEach((element) {
+                        Map data = {
+                          "maincategory": element.maincategory,
+                          "title": element.title,
+                          "daily": element.daily,
+                          "total": dainikPopupController.totalTarget.value,
+                          "subtitle": element.subtitle,
+                          "uid": userid,
+                          "heading": element.heading,
+                          "categoryid": element.categoryid,
+                          "image": "assets/Frame.png",
+                        };
+                        niyamController.niyamList.add(data);
+                      });
+
+                      Get.to(Card_Screen(
+                        userid: userid,
+                      ));
+                    },
                     child: Container(
                       height: _size.height * 0.02,
                       width: _size.width * 0.15,
@@ -347,7 +381,6 @@ class _HomePageState extends State<HomePage> {
                                             .usertasklist[index].daily;
                                         var title = usertaskcontroller
                                             .usertasklist[index].title;
- 
                                         // print(id);
                                         Map data = {
                                           "taskid": taskid,
@@ -364,14 +397,6 @@ class _HomePageState extends State<HomePage> {
                                             : Get.to(YesNoScreen(
                                                 data: data,
                                               ));
-
-                                        // index == 1
-                                        //     ? Get.to(MalaScreen(
-                                        //         data: data,
-                                        //       ))
-                                        //     : Get.to(YesNoScreen(
-                                        //         data: data,
-                                        //       ));
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(

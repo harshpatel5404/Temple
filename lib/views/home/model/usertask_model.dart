@@ -40,6 +40,7 @@ class Usertasklist {
     this.totalgole,
     this.totalmember,
     this.maincategory,
+    this.categoryid,
     this.daily,
     this.total,
     this.taskid,
@@ -56,6 +57,7 @@ class Usertasklist {
   final String? totalgole;
   final String? totalmember;
   final String? maincategory;
+  final String? categoryid;
 
   final String? daily;
   final String? total;
@@ -78,6 +80,7 @@ class Usertasklist {
         totalgole: json["totalgole"],
         totalmember: json["totalmember"],
         maincategory: json["maincategory"],
+        categoryid: json["categoryid"],
         daily: json["daily"],
         total: json["total"],
         taskid: json["taskid"],
@@ -95,6 +98,7 @@ class Usertasklist {
         "totalgole": totalgole,
         "totalmember": totalmember,
         "maincategory": maincategory,
+        "categoryid": categoryid,
         "daily": daily,
         "total": total,
         "taskid": taskid,

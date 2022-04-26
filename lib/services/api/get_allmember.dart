@@ -16,11 +16,11 @@ Future<UserModel?> Getallmember(number) async {
           encoding: Encoding.getByName('utf-8'));
 
   if (response.statusCode == 200) {
-    print("data added"); 
+    print("member found"); 
     print(UserModel.fromMap(jsonDecode(response.body)));
     return UserModel.fromMap(jsonDecode(response.body));
   } else {
-    print("data not add");
+    print("member not found");
     return null;
   }
 }
