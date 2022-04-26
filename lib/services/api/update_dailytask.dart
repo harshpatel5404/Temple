@@ -1,11 +1,16 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:temple/services/api/registration_service.dart';
 
 import 'api_services.dart';
 
 Future addUserDailytask(data, todaycomplatetask, remaning) async {
+  DateTime currentDate = DateTime.now();
+  var dt = DateFormat('yyyy-MM-dd').format(currentDate);
+  print(dt);
+
   final response = await http
       .post(Uri.parse(baseUrl + 'dailytask/addUserDailyTask'),
           headers: {
@@ -16,7 +21,7 @@ Future addUserDailytask(data, todaycomplatetask, remaning) async {
             "toaltask": data["toaltask"],
             "todaytask": data["todaytask"],
             "todaycomplatetask": todaycomplatetask,
-            "date": "1",
+            "date": dt.toString(),
             "remaningtask": remaning,
             "taskid": data["taskid"]
           }),
@@ -44,4 +49,3 @@ Future deletetask(id) async {
     }
   });
 }
- 

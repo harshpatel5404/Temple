@@ -17,6 +17,7 @@ class MalaScreen extends StatefulWidget {
 class _MalaScreenState extends State<MalaScreen> {
   var todaymala = 0;
   var todaymala1 = 0;
+
   @override
   Widget build(BuildContext context) {
     TextEditingController malaController = TextEditingController();
@@ -217,7 +218,7 @@ class _MalaScreenState extends State<MalaScreen> {
                                 height: 10,
                               ),
                               Text(
-                                "120",
+                                "0",
                                 style: GoogleFonts.poppins(
                                   textStyle: TextStyle(
                                       color: Colors.white,
@@ -463,30 +464,23 @@ class _MalaScreenState extends State<MalaScreen> {
                         InkWell(
                           onTap: () {
                             int dailytask = int.parse(widget.data["todaytask"]);
-                            // int complete = int.parse(malaController.text);
-                            if (dailytask >= todaymala) {
-                              todaymala1 += int.parse(malaController.text);
-                              int remaning = dailytask - todaymala1;
-                              // print(todaymala);
-                              // print(remaning);
-                              if (remaning >= 0) {
-                                todaymala = todaymala1;
-                                setState(() {});
-                                addUserDailytask(widget.data, todaymala, remaning);
-                              } else {
-                                todaymala1 = todaymala;
-                                 Fluttertoast.showToast(
-                                  msg: "Today task completed",
-                                  backgroundColor: Colors.green,
-                                  gravity: ToastGravity.BOTTOM);
-                                
-                              }
+                            todaymala1 += int.parse(malaController.text);
+                            int remaning = dailytask - todaymala1;
+                            if (remaning >= 0) {
+                              todaymala = todaymala1;
+                              setState(() {});
+                              addUserDailytask(
+                                  widget.data, todaymala, remaning);
                             } else {
+                              todaymala1 = todaymala;
+                              todaymala = dailytask;
+                              setState(() {});
                               Fluttertoast.showToast(
-                                  msg: "Today task completed",
+                                  msg: "Your task is completed",
                                   backgroundColor: Colors.green,
                                   gravity: ToastGravity.BOTTOM);
                             }
+
                             // Get.back();
                           },
                           child: Container(

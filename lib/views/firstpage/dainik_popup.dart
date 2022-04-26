@@ -227,9 +227,8 @@ Future dainkLaxDialog(
                               alreday = true;
                               // Get.back();
                               if (istask == false) {
-                                element["daily"] = dailyController.text;
-                                element["total"] =
-                                    dainikPopupController.totalTarget.value;
+                                element["daily"] =  isNiyam ? dailyController.text : "1";
+                                element["total"] = dainikPopupController.totalTarget.value;
                               }
                               istask
                                   ? Fluttertoast.showToast(
