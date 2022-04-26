@@ -43,7 +43,7 @@ class _MalaScreenState extends State<MalaScreen> {
                       width: Get.width * 0.02,
                     ),
                     Text(
-                      "માળા",
+                      widget.data["title"],
                       style: GoogleFonts.poppins(
                         textStyle: TextStyle(
                           fontSize: 20,

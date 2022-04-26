@@ -15,8 +15,7 @@ import 'package:temple/views/registration/registration_screen.dart';
 import 'package:temple/widget/app_drawer.dart';
 
 class SelectMember extends StatefulWidget {
-  final   memberlist;
-  const SelectMember({Key? key, this.memberlist}) : super(key: key);
+  const SelectMember({Key? key, }) : super(key: key);
 
   @override
   State<SelectMember> createState() => _SelectMemberState();
@@ -28,15 +27,28 @@ Usertaskcontroller usertaskcontroller = Get.find();
 
 bool status = false;
 
-class _SelectMemberState extends State<SelectMember> {
-  void getallmember() async {
-    // await getCategory();
-  }
+List membercolor = [
+  // {
+  //   "color": Color(0xff4CADCE),
+  //   "lcolor": Color(0xffE3F8FF),
+  //   "image": "assets/member3.svg"
+  // },
+  // {
+  // "color": Color(0xffD6B960),
+  // "lcolor": Color(0xffFFF7DE),
+  // "image": "assets/member2.svg"
+  // },
+  {
+    "color": const Color(0xffDF5679),
+    "lcolor": const Color(0xffFFEFF3),
+    "image": "assets/member1.svg"
+  },
+];
 
+class _SelectMemberState extends State<SelectMember> {
   @override
   void initState() {
     super.initState();
-    getallmember();
   }
 
   @override
@@ -135,9 +147,10 @@ class _SelectMemberState extends State<SelectMember> {
                                         children: [
                                           Container(
                                             decoration: BoxDecoration(
-                                              color: Color(0xffFFF7DE),
+                                              color: membercolor[0]["lcolor"],
                                               border: Border.all(
-                                                  color: Color(0xffD6B960),
+                                                  color: membercolor[0]
+                                                      ["color"],
                                                   width: 4),
                                               borderRadius:
                                                   BorderRadius.circular(20),
@@ -151,11 +164,12 @@ class _SelectMemberState extends State<SelectMember> {
                                                   height: Get.height * 0.005,
                                                 ),
                                                 SvgPicture.asset(
-                                                    "assets/member3.svg"),
+                                                    membercolor[0]["image"]),
                                                 Container(
                                                   height: 25,
                                                   width: double.infinity,
-                                                  color: Color(0xffD6B960),
+                                                  color: membercolor[0]
+                                                      ["color"],
                                                   child: Center(
                                                     child: Text(
                                                       getallmembercontroller
@@ -188,7 +202,7 @@ class _SelectMemberState extends State<SelectMember> {
                                 } else {
                                   if (getallmembercontroller
                                           .memberlist.length <=
-                                      5) {
+                                      4) {
                                     return InkWell(
                                       onTap: () async {
                                         usernumber = await getusernumber();

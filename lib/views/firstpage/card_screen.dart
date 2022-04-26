@@ -318,28 +318,28 @@ class _Card_ScreenState extends State<Card_Screen> {
                                                                   print(
                                                                       carddata);
 
-                                                                  // niyamController.niyamList[index]
-                                                                  //             [
-                                                                  //             "maincategory"] ==
-                                                                  //         "niyam"
-                                                                  //     ? dainkLaxDialog(
-                                                                  //         context,
-                                                                  //         days,
-                                                                  //         false,
-                                                                  //         carddata,
-                                                                  //         true)
-                                                                  //     : dainkLaxDialog(
-                                                                  //         context,
-                                                                  //         days,
-                                                                  //         false,
-                                                                  //         carddata,
-                                                                  //         false);
-                                                                  dainkLaxDialog(
-                                                                      context,
-                                                                      days,
-                                                                      false,
-                                                                      carddata,
-                                                                      true);
+                                                                  niyamController.niyamList[index]
+                                                                              [
+                                                                              "maincategory"] ==
+                                                                          "niyam"
+                                                                      ? dainkLaxDialog(
+                                                                          context,
+                                                                          days,
+                                                                          false,
+                                                                          carddata,
+                                                                          false)
+                                                                      : dainkLaxDialog(
+                                                                          context,
+                                                                          days,
+                                                                          false,
+                                                                          carddata,
+                                                                          true);
+                                                                  // dainkLaxDialog(
+                                                                  //     context,
+                                                                  //     days,
+                                                                  //     false,
+                                                                  //     carddata,
+                                                                  //     true);
                                                                 },
                                                                 child:
                                                                     Container(
@@ -990,11 +990,11 @@ class _CardSliderState extends State<CardSlider> {
               child: InkWell(
                 onTap: () {
                   dainikPopupController.totalTarget.value = 0;
-                  // cardinfo.maincategory =="niyam"
-                  //     ? dainkLaxDialog(context, days, false, cardinfo, true)
-                  //     : dainkLaxDialog(context, days, false, cardinfo, false);
+                  cardinfo.maincategory =="niyam"
+                      ? dainkLaxDialog(context, days, false, cardinfo, false)
+                      : dainkLaxDialog(context, days, false, cardinfo, true);
 
-                  dainkLaxDialog(context, days, true, cardinfo, true);
+                  // dainkLaxDialog(context, days, true, cardinfo, true);
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),

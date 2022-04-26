@@ -31,8 +31,8 @@ Future<void> setusernumber(String usernumber) async {
 
 Future<String?> getusernumber() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  String? number = prefs.getString("Usernumber");
-  return number;
+  usernumber = prefs.getString("Usernumber");
+  return usernumber;
 }
 
 Future<void> removeusernumber() async {

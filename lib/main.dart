@@ -28,7 +28,19 @@ void main() async {
   // removelogin();
   // removeusernumber();
   // removeuserid();
+  usernumber = await getusernumber();
+  login = await getlogin();
+  userid = await getuserid();
+  Getallmembercontroller getallmembercontroller =
+      Get.put(Getallmembercontroller());
+  Usertaskcontroller usertaskcontroller = Get.put(Usertaskcontroller());
+
   await getbymainCategory("bhajan");
+  await getallmembercontroller.getmemberdata();
+  if (userid != null) {
+    await usertaskcontroller.getusertask(userid);
+  }
+
   runApp(MyApp(defaultHome: SplashScreen()));
 }
 

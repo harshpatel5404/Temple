@@ -345,29 +345,33 @@ class _HomePageState extends State<HomePage> {
                                             .usertasklist[index].total;
                                         var todaytask = usertaskcontroller
                                             .usertasklist[index].daily;
+                                        var title = usertaskcontroller
+                                            .usertasklist[index].title;
+ 
                                         // print(id);
                                         Map data = {
                                           "taskid": taskid,
                                           "toaltask": toaltask,
-                                          "todaytask": todaytask
+                                          "todaytask": todaytask,
+                                          "title": title,
                                         };
-                                        // usertaskcontroller
-                                        //         .usertasklist[index].maincategory == "niyam" ?
-                                        //         Get.to(MalaScreen(
-                                        //       data: data,
-                                        //     )) : Get.to(YesNoScreen(
-                                        //       data: data,
-                                        //     ));
-                                       
-
-
-                                        index == 1
+                                        usertaskcontroller.usertasklist[index]
+                                                    .maincategory ==
+                                                "bhajan"
                                             ? Get.to(MalaScreen(
                                                 data: data,
                                               ))
                                             : Get.to(YesNoScreen(
                                                 data: data,
                                               ));
+
+                                        // index == 1
+                                        //     ? Get.to(MalaScreen(
+                                        //         data: data,
+                                        //       ))
+                                        //     : Get.to(YesNoScreen(
+                                        //         data: data,
+                                        //       ));
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(

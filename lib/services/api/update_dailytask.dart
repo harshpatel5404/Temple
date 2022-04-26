@@ -44,26 +44,4 @@ Future deletetask(id) async {
     }
   });
 }
-// Future getSeparatetask( ) async {
-//   final response = await http
-//       .post(Uri.parse(baseUrl + 'dailytask/addUserDailyTask'),
-//           headers: {
-//             'Content-Type': 'application/json',
-//           },
-//           body: json.encode({
-            
-//           }),
-//           encoding: Encoding.getByName('utf-8'))
-//       .then((response) {
-//     if (response.statusCode == 200) {
-//       var jsondata = json.decode(response.body);
-//       print(jsondata);
-//     }
-//   });
-// }
-
-
-
-
-
-
+ 

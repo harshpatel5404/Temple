@@ -46,7 +46,7 @@ class _YesNoScreenState extends State<YesNoScreen> {
                   width: Get.width * 0.02,
                 ),
                 Text(
-                  "Chesta",
+                  widget.data["title"],
                   style: GoogleFonts.poppins(
                     textStyle: TextStyle(
                       fontSize: 20,

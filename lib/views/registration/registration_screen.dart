@@ -455,9 +455,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                             print("member list length");
                             print(getallmembercontroller.memberlist.length);
                             if (getallmembercontroller.memberlist.length != 0) {
-                              Get.off(SelectMember(
-                                memberlist: value,
-                              ));
+                              Get.off(SelectMember());
                             } else {
                               Get.off(Card_Screen(userid: userid));
                             }

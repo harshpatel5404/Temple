@@ -28,25 +28,11 @@ class _SplashScreenState extends State<SplashScreen> {
       Get.put(Getallmembercontroller());
   Usertaskcontroller usertaskcontroller = Get.put(Usertaskcontroller());
 
-  Future getData() async {
-    usernumber = await getusernumber();
-    login = await getlogin();
-    userid = await getuserid();
-    print(login);
-    print(usernumber);
-    print(userid);
-    getallmembercontroller.getmemberdata();
-    userid = await getuserid().then((value) async {
-      if (value != null) {
-        await usertaskcontroller.getusertask(value);
-      }
-    });
-  }
+   
 
   @override
   void initState() {
     super.initState();
-    getData();
     Timer(
         const Duration(seconds: 3),
         () async => (true == login)
@@ -56,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         ? Get.offAll(AppDrawer())
                         : Get.offAll(Card_Screen(userid: userid))
                     : Get.offAll(SelectMember(
-                        memberlist: usertaskcontroller.usertasklist,
+                       
                       ))
                 : Get.offAll(OtpScreen())
             : Get.offAll(OtpScreen()));

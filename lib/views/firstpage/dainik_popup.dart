@@ -225,7 +225,7 @@ Future dainkLaxDialog(
                           niyamController.niyamList.forEach((element) {
                             if (element["title"] == taskdata.title) {
                               alreday = true;
-                              Get.back();
+                              // Get.back();
                               if (istask == false) {
                                 element["daily"] = dailyController.text;
                                 element["total"] =
