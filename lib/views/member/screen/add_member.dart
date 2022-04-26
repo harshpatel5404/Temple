@@ -56,17 +56,20 @@ class _SelectMemberState extends State<SelectMember> {
   @override
   Widget build(BuildContext context) {
     // getallmembercontroller.getmemberdata();
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         centerTitle: true,
         elevation: 0,
-        title: Text(
-          "SELECT MEMBER",
-          style: GoogleFonts.poppins(
-            textStyle: const TextStyle(
-                color: kPrimarycolor, fontWeight: FontWeight.w700),
+        title: Center(
+          child: Text(
+            "SELECT MEMBER",
+            style: GoogleFonts.poppins(
+              textStyle: const TextStyle(
+                  color: kPrimarycolor, fontWeight: FontWeight.w700),
+            ),
           ),
         ),
         actions: [
