@@ -196,19 +196,217 @@ class _SelectMemberState extends State<SelectMember> {
                                           ),
                                           InkWell(
                                             onTap: () {
-                                              var id = getallmembercontroller
-                                                  .memberlist[index].id;
-                                              if (getallmembercontroller
-                                                      .memberlist.length ==
-                                                  1) {
-                                                removelogin();
-                                                removeuserid();
-                                                removeusernumber();
-                                                Get.off(OtpScreen());
-                                              }
-                                              getallmembercontroller.memberlist
-                                                  .removeAt(index);
-                                              deleteUser(id);
+                                              showDialog(
+                                                barrierDismissible: false,
+                                                context: context,
+                                                builder: (_) => Dialog(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20)),
+                                                  backgroundColor: Colors.white,
+                                                  insetPadding:
+                                                      const EdgeInsets.only(
+                                                          left: 10, right: 10),
+                                                  clipBehavior: Clip
+                                                      .antiAliasWithSaveLayer,
+                                                  child: SizedBox(
+                                                    height: Get.height * 0.24,
+                                                    width: Get.width * 0.8,
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        const SizedBox(
+                                                            height: 10),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            InkWell(
+                                                              onTap: () {
+                                                                Get.back();
+                                                              },
+                                                              child:
+                                                                  const Padding(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        right:
+                                                                            12,
+                                                                        top: 1),
+                                                                child: Icon(
+                                                                  Icons
+                                                                      .cancel_rounded,
+                                                                  color: Colors
+                                                                      .black,
+                                                                  size: 28,
+                                                                ),
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        Text(
+                                                          "Confirmation",
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                            textStyle: TextStyle(
+                                                                fontSize: 16,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                color: Colors
+                                                                    .black),
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                            height: 10),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: 20,
+                                                                  right: 20),
+                                                          child: Text(
+                                                            "Are you sure want to delete user?",
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: GoogleFonts
+                                                                .poppins(
+                                                              textStyle:
+                                                                  TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontSize: 13,
+                                                                color: Colors
+                                                                    .black,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Expanded(
+                                                          child: Align(
+                                                            alignment: Alignment
+                                                                .bottomCenter,
+                                                            child: Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .end,
+                                                              children: [
+                                                                Row(
+                                                                  children: [
+                                                                    GestureDetector(
+                                                                      child:
+                                                                          InkWell(
+                                                                        onTap:
+                                                                            () {
+                                                                          var id = getallmembercontroller
+                                                                              .memberlist[index]
+                                                                              .id;
+                                                                          if (getallmembercontroller.memberlist.length ==
+                                                                              1) {
+                                                                            removelogin();
+                                                                            removeuserid();
+                                                                            removeusernumber();
+                                                                            Get.off(OtpScreen());
+                                                                          }
+                                                                          getallmembercontroller
+                                                                              .memberlist
+                                                                              .removeAt(index);
+                                                                          deleteUser(
+                                                                              id);
+                                                                        },
+                                                                        child:
+                                                                            Container(
+                                                                          height:
+                                                                              Get.height * 0.06,
+                                                                          width:
+                                                                              Get.width * 0.4,
+                                                                          decoration:
+                                                                              const BoxDecoration(
+                                                                            borderRadius:
+                                                                                BorderRadius.only(bottomLeft: Radius.circular(20)),
+                                                                            color:
+                                                                                Color(0xff008ABD),
+                                                                          ),
+                                                                          child:
+                                                                              Center(
+                                                                            child:
+                                                                                Text(
+                                                                              "Yes",
+                                                                              style: GoogleFonts.poppins(
+                                                                                textStyle: TextStyle(
+                                                                                  fontWeight: FontWeight.w500,
+                                                                                  fontSize: 16,
+                                                                                  color: Colors.white,
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                      onTap:
+                                                                          () {
+                                                                        Navigator.pop(
+                                                                            context);
+                                                                      },
+                                                                    ),
+                                                                    GestureDetector(
+                                                                      onTap:
+                                                                          () {
+                                                                        Get.back();
+                                                                      },
+                                                                      child:
+                                                                          InkWell(
+                                                                        onTap:
+                                                                            () {
+                                                                          Get.back();
+                                                                        },
+                                                                        child:
+                                                                            Container(
+                                                                          height:
+                                                                              Get.height * 0.06,
+                                                                          width:
+                                                                              Get.width * 0.4,
+                                                                          decoration:
+                                                                              const BoxDecoration(
+                                                                            borderRadius:
+                                                                                BorderRadius.only(bottomRight: Radius.circular(20)),
+                                                                            color:
+                                                                                Color(0xffF95050),
+                                                                          ),
+                                                                          child:
+                                                                              Center(
+                                                                            child:
+                                                                                Text(
+                                                                              "Cancel",
+                                                                              style: GoogleFonts.poppins(
+                                                                                textStyle: TextStyle(
+                                                                                  fontWeight: FontWeight.w500,
+                                                                                  fontSize: 16,
+                                                                                  color: Colors.white,
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
                                             },
                                             child: const Align(
                                               alignment: Alignment.topRight,
