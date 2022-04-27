@@ -263,27 +263,27 @@ class _HomePageState extends State<HomePage> {
                   Bounce(
                     duration: const Duration(milliseconds: 110),
                     onPressed: () {
-                      NiyamController niyamController =
-                          Get.put(NiyamController());
-                      niyamController.niyamList.clear();
-                      usertaskcontroller.usertasklist.forEach((element) {
-                        Map data = {
-                          "maincategory": element.maincategory,
-                          "title": element.title,
-                          "daily": element.daily,
-                          "total": dainikPopupController.totalTarget.value,
-                          "subtitle": element.subtitle,
-                          "uid": userid,
-                          "heading": element.heading,
-                          "categoryid": element.categoryid,
-                          "image": "assets/Frame.png",
-                        };
-                        niyamController.niyamList.add(data);
-                      });
+                      // NiyamController niyamController =
+                      //     Get.put(NiyamController());
+                      // niyamController.niyamList.clear();
+                      // usertaskcontroller.usertasklist.forEach((element) {
+                      //   Map data = {
+                      //     "maincategory": element.maincategory,
+                      //     "title": element.title,
+                      //     "daily": element.daily,
+                      //     "total": dainikPopupController.totalTarget.value,
+                      //     "subtitle": element.subtitle,
+                      //     "uid": userid,
+                      //     "heading": element.heading,
+                      //     "categoryid": element.categoryid,
+                      //     "image": "assets/Frame.png",
+                      //   };
+                      //   niyamController.niyamList.add(data);
+                      // });
 
-                      Get.to(Card_Screen(
-                        userid: userid,
-                      ));
+                      // Get.to(Card_Screen(
+                      //   userid: userid,
+                      // ));
                     },
                     child: Container(
                       height: _size.height * 0.02,
@@ -306,7 +306,29 @@ class _HomePageState extends State<HomePage> {
                             SizedBox(width: _size.width * 0.012),
                             InkWell(
                               onTap: () {
-                                Get.to(AchievementPage());
+                                NiyamController niyamController =
+                                    Get.put(NiyamController());
+
+                                usertaskcontroller.usertasklist
+                                    .forEach((element) {
+                                  Map data = {
+                                    "maincategory": element.maincategory,
+                                    "title": element.title,
+                                    "daily": element.daily,
+                                    "total":
+                                        dainikPopupController.totalTarget.value,
+                                    "subtitle": element.subtitle,
+                                    "uid": userid,
+                                    "heading": element.heading,
+                                    "categoryid": element.categoryid,
+                                    "image": "assets/Frame.png",
+                                  };
+                                  niyamController.niyamList.add(data);
+                                });
+
+                                Get.to(Card_Screen(
+                                  userid: userid,
+                                ));
                               },
                               child: const Text(
                                 "Edit",
@@ -381,13 +403,17 @@ class _HomePageState extends State<HomePage> {
                                             .usertasklist[index].daily;
                                         var title = usertaskcontroller
                                             .usertasklist[index].title;
+                                        var maincategory = usertaskcontroller
+                                            .usertasklist[index].maincategory;
                                         // print(id);
                                         Map data = {
                                           "taskid": taskid,
                                           "toaltask": toaltask,
                                           "todaytask": todaytask,
                                           "title": title,
+                                          "maincategory": maincategory,
                                         };
+
                                         usertaskcontroller.usertasklist[index]
                                                     .maincategory ==
                                                 "bhajan"
@@ -397,17 +423,14 @@ class _HomePageState extends State<HomePage> {
                                             : Get.to(YesNoScreen(
                                                 data: data,
                                               ));
+                                        // print(usertaskcontroller.usertasklist[index]
+                                        //             .maincategory);
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(10),
-                                            color: Color(0xffFAE5E1)
-                                            //  Color(
-                                            //   fromHex(niyamController
-                                            //     .niyamList[index]["color"])
-                                            //     ),
-                                            ),
+                                            color: Color(0xffFAE5E1)),
                                         height: Get.height * 0.12,
                                         width: Get.width,
                                         child: Row(
