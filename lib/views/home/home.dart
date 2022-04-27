@@ -14,6 +14,7 @@ import 'package:temple/views/achievement/achievement.dart';
 import 'package:temple/views/firstpage/card_screen.dart';
 import 'package:temple/views/firstpage/card_screen_controller.dart';
 import 'package:temple/views/home/controller.dart/Home_controller.dart';
+import 'package:temple/views/level/level_screen.dart';
 import 'package:temple/views/mala_screen/mala_screen.dart';
 import 'package:temple/views/mala_screen/yes_no.dart';
 import 'package:temple/views/member/controller/get_member_controller.dart';
@@ -308,7 +309,6 @@ class _HomePageState extends State<HomePage> {
                               onTap: () {
                                 NiyamController niyamController =
                                     Get.put(NiyamController());
-
                                 usertaskcontroller.usertasklist
                                     .forEach((element) {
                                   Map data = {
@@ -509,7 +509,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Get.to(YesNoScreen());
+          Get.to(LevelScreen());
         },
         child: Image.asset("assets/note.png"),
       ),
