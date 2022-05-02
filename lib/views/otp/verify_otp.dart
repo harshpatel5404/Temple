@@ -8,8 +8,11 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:temple/constant/color.dart';
 import 'package:temple/constant/snack_bar.dart';
+import 'package:temple/services/api/registration_service.dart';
 import 'package:temple/services/notification_service.dart';
 import 'package:temple/services/pref_manager.dart';
+import 'package:temple/views/member/controller/get_member_controller.dart';
+import 'package:temple/views/member/screen/add_member.dart';
 import 'package:temple/views/otp/otp_screen.dart';
 import 'package:temple/views/registration/registration_screen.dart';
 import 'package:temple/widget/app_button.dart';
@@ -223,20 +226,58 @@ class _VerifyOtpState extends State<VerifyOtp> {
           ),
           SizedBox(height: Get.height * 0.05),
           AppButton(
-            onPress: ()  async{
-              if (otp == widget.otpCode.toString() || otp == code.toString()){
+            onPress: () async {
+              if (otp == widget.otpCode.toString() || otp == code.toString()) {
+                await setusernumber(widget.mobileNumber);
                 scaffoldMessage(context, "Otp Verification Successfully");
-                // var number = int.parse(widget.mobileNumber);
-             
-                Get.off(RegistrationScreen(
-                  mobileNumber: widget.mobileNumber,
-                ));
+                usernumber = widget.mobileNumber;
+                Getallmembercontroller getallmembercontroller = Get.find();
+                getallmembercontroller.getmemberdata().then((value) {
+                  if (getallmembercontroller.memberlist.isEmpty) {
+                    Get.off(RegistrationScreen(
+                      mobileNumber: widget.mobileNumber,
+                    ));
+                  } else {
+                    Get.off(const SelectMember());
+                  }
+                });
               } else {
                 scaffoldMessage(context, "Otp code is not valid");
               }
             },
             text: "VERIFY",
-          )
+          ),
+          // AppButton(
+          //   text: "GET OTP",
+          //   onPress: () {
+          //     var rng = Random();
+          //     var code = rng.nextInt(9000) + 1000;
+
+          //     if (mobileNumber.text.isEmpty) {
+          //       scaffoldMessage(context, "Enter the mobile number");
+          //     } else if (mobileNumber.text.length < 10 ||
+          //         mobileNumber.text.length > 10) {
+          //       scaffoldMessage(
+          //           context, "mobile number must be 10 characters.");
+          //     } else {
+          //       usernumber = mobileNumber.text;
+          //       Getallmembercontroller getallmembercontroller = Get.find();
+          //       getallmembercontroller.getmemberdata().then((value) {
+          //         if (getallmembercontroller.memberlist.isEmpty) {
+          //           NotificationService().showNotification(
+          //               1, "OTP Verification Code", "$code", 1);
+          //           Get.to(VerifyOtp(
+          //             mobileNumber: mobileNumber.text,
+          //             countryCode: countryCode,
+          //             otpCode: code,
+          //           ));
+          //         } else {
+          //           Get.off(const SelectMember());
+          //         }
+          //       });
+          //     }
+          //   },
+          // )
         ],
       ),
     );

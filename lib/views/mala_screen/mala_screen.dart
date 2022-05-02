@@ -20,7 +20,7 @@ class _MalaScreenState extends State<MalaScreen> {
   var todaymala1 = 0;
   MalaController malacontroller = Get.put(MalaController());
 
-  @override
+  @override 
   void initState() {
     super.initState();
     findByTaskId(widget.data["taskid"]).then((value) {

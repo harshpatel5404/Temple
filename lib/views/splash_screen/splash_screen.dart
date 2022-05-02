@@ -28,8 +28,6 @@ class _SplashScreenState extends State<SplashScreen> {
       Get.put(Getallmembercontroller());
   Usertaskcontroller usertaskcontroller = Get.put(Usertaskcontroller());
 
-   
-
   @override
   void initState() {
     super.initState();
@@ -40,10 +38,11 @@ class _SplashScreenState extends State<SplashScreen> {
                 ? getallmembercontroller.memberlist.length <= 1
                     ? usertaskcontroller.usertasklist.isNotEmpty
                         ? Get.offAll(AppDrawer())
-                        : Get.offAll(Card_Screen(userid: userid))
-                    : Get.offAll(SelectMember(
-                       
-                      ))
+                        : Get.offAll(Card_Screen(
+                            userid: userid,
+                            isback: true,
+                          ))
+                    : Get.offAll(SelectMember())
                 : Get.offAll(OtpScreen())
             : Get.offAll(OtpScreen()));
   }

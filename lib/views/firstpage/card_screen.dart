@@ -74,7 +74,9 @@ Getallmembercontroller getallmembercontroller =
 
 class Card_Screen extends StatefulWidget {
   final userid;
-  const Card_Screen({Key? key, required this.userid}) : super(key: key);
+  bool isback;
+  Card_Screen({Key? key, required this.userid, required this.isback})
+      : super(key: key);
 
   @override
   State<Card_Screen> createState() => _Card_ScreenState();
@@ -109,617 +111,629 @@ class _Card_ScreenState extends State<Card_Screen> {
   bool status = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: FlutterSwitch(
-              height: 25,
-              width: 50,
-              activeColor: Colors.black,
-              activeTextColor: Colors.white,
-              inactiveColor: Colors.grey,
-              inactiveTextColor: Colors.black,
-              activeText: "ગુ ",
-              inactiveText: "ગુ ",
-              value: status,
-              valueFontSize: 10.0,
-              borderRadius: 30.0,
-              showOnOff: true,
-              onToggle: (val) {
-                setState(() {
-                  status = val;
-                });
-              },
-            ),
-          ),
-        ],
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        backgroundColor: Colors.white,
-        leading: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5.0),
-          child: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
-            ),
-          ),
-        ),
-        title: Text(
-          "નિયમોની યાદી",
-          style: GoogleFonts.balooBhai(
-            textStyle: const TextStyle(
-              color: Color(0xff008ABD),
-              fontSize: 20,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
+    return WillPopScope(
+      onWillPop: () async => widget.isback,
+      child: Scaffold(
+        appBar: AppBar(
+          actions: [
             Padding(
-              padding: EdgeInsets.only(left: 8.0),
-              child: Text(
-                "Your selected niyams",
-                style: GoogleFonts.poppins(
-                  textStyle: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 16),
-                ),
-              ),
-            ),
-            Obx(() {
-              return niyamController.niyamList.isNotEmpty
-                  ? SizedBox(
-                      height: Get.height * 0.17,
-                      width: Get.width,
-                      child: ListView.builder(
-                          itemCount: niyamController.niyamList.length,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Row(
-                                children: [
-                                  Bounce(
-                                    duration: const Duration(milliseconds: 110),
-                                    onPressed: () {
-                                      showDialog(
-                                        barrierDismissible: false,
-                                        context: context,
-                                        builder: (_) => Dialog(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20)),
-                                          backgroundColor: Colors.white,
-                                          insetPadding: const EdgeInsets.only(
-                                              left: 10, right: 10),
-                                          clipBehavior:
-                                              Clip.antiAliasWithSaveLayer,
-                                          child: SizedBox(
-                                            height: Get.height * 0.24,
-                                            width: Get.width * 0.8,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                const SizedBox(height: 10),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  children: [
-                                                    InkWell(
-                                                      onTap: () {
-                                                        Get.back();
-                                                      },
-                                                      child: const Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                right: 12,
-                                                                top: 1),
-                                                        child: Icon(
-                                                          Icons.cancel_rounded,
-                                                          color: Colors.black,
-                                                          size: 28,
-                                                        ),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                                Text(
-                                                  "Confirmation",
-                                                  style: GoogleFonts.poppins(
-                                                    textStyle: TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        color: Colors.black),
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 10),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 20, right: 20),
-                                                  child: Text(
-                                                    "Are you sure you want to remove this niyam from list?",
-                                                    textAlign: TextAlign.center,
-                                                    style: GoogleFonts.poppins(
-                                                      textStyle: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 13,
-                                                        color: Colors.black,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Expanded(
-                                                  child: Align(
-                                                    alignment:
-                                                        Alignment.bottomCenter,
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment.end,
-                                                      children: [
-                                                        Row(
-                                                          children: [
-                                                            GestureDetector(
-                                                              child: InkWell(
-                                                                onTap: () {
-                                                                  Get.back();
-                                                                  dainikPopupController
-                                                                      .totalTarget
-                                                                      .value = 0;
-                                                                  // print(niyamController
-                                                                  //         .niyamList[
-                                                                  //     index]["id"]);
-
-                                                                  MyCards carddata = MyCards(
-                                                                      maincategory:
-                                                                          niyamController.niyamList[index][
-                                                                              "maincategory"],
-                                                                      remaning:
-                                                                          "0",
-                                                                      totallax:
-                                                                          niyamController.niyamList[index][
-                                                                              "totalgole"],
-                                                                      heading: niyamController
-                                                                              .niyamList[index][
-                                                                          "heading"],
-                                                                      totalmember:
-                                                                          niyamController.niyamList[index]
-                                                                              [
-                                                                              "totalmember"],
-                                                                      color:
-                                                                          "#FAE5E1",
-                                                                      title: niyamController.niyamList[index]
-                                                                          ["title"],
-                                                                      subTitle: niyamController.niyamList[index]["subtitle"],
-                                                                      categoryid: niyamController.niyamList[index]["categoryid"],
-                                                                      taskid: niyamController.niyamList[index]["id"].toString(),
-                                                                      images: "assets/Frame.png",
-                                                                      rotate: 0,
-                                                                      opacity: 0,
-                                                                      positionY: 0,
-                                                                      scal: 0);
-                                                                  print(
-                                                                      carddata);
-
-                                                                  niyamController.niyamList[index]
-                                                                              [
-                                                                              "maincategory"] ==
-                                                                          "niyam"
-                                                                      ? dainkLaxDialog(
-                                                                          context,
-                                                                          days,
-                                                                          false,
-                                                                          carddata,
-                                                                          false)
-                                                                      : dainkLaxDialog(
-                                                                          context,
-                                                                          days,
-                                                                          false,
-                                                                          carddata,
-                                                                          true);
-                                                                  // dainkLaxDialog(
-                                                                  //     context,
-                                                                  //     days,
-                                                                  //     false,
-                                                                  //     carddata,
-                                                                  //     true);
-                                                                },
-                                                                child:
-                                                                    Container(
-                                                                  height:
-                                                                      Get.height *
-                                                                          0.06,
-                                                                  width:
-                                                                      Get.width *
-                                                                          0.4,
-                                                                  decoration:
-                                                                      const BoxDecoration(
-                                                                    borderRadius:
-                                                                        BorderRadius.only(
-                                                                            bottomLeft:
-                                                                                Radius.circular(20)),
-                                                                    color: Color(
-                                                                        0xff008ABD),
-                                                                  ),
-                                                                  child: Center(
-                                                                    child: Text(
-                                                                      "Edit",
-                                                                      style: GoogleFonts
-                                                                          .poppins(
-                                                                        textStyle:
-                                                                            TextStyle(
-                                                                          fontWeight:
-                                                                              FontWeight.w500,
-                                                                          fontSize:
-                                                                              16,
-                                                                          color:
-                                                                              Colors.white,
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              onTap: () {
-                                                                Navigator.pop(
-                                                                    context);
-                                                              },
-                                                            ),
-                                                            GestureDetector(
-                                                              onTap: () {
-                                                                Get.back();
-                                                              },
-                                                              child: InkWell(
-                                                                onTap: () {
-                                                                  niyamController
-                                                                      .niyamList
-                                                                      .removeAt(
-                                                                          index);
-                                                                  Navigator.pop(
-                                                                      context);
-                                                                },
-                                                                child:
-                                                                    Container(
-                                                                  height:
-                                                                      Get.height *
-                                                                          0.06,
-                                                                  width:
-                                                                      Get.width *
-                                                                          0.4,
-                                                                  decoration:
-                                                                      const BoxDecoration(
-                                                                    borderRadius:
-                                                                        BorderRadius.only(
-                                                                            bottomRight:
-                                                                                Radius.circular(20)),
-                                                                    color: Color(
-                                                                        0xffF95050),
-                                                                  ),
-                                                                  child: Center(
-                                                                    child: Text(
-                                                                      "Remove",
-                                                                      style: GoogleFonts
-                                                                          .poppins(
-                                                                        textStyle:
-                                                                            TextStyle(
-                                                                          fontWeight:
-                                                                              FontWeight.w500,
-                                                                          fontSize:
-                                                                              16,
-                                                                          color:
-                                                                              Colors.white,
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    child: Container(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          CircleAvatar(
-                                            radius: 38,
-                                            backgroundColor: Color(0xffFFF7DE),
-                                            child: Image(
-                                              image: AssetImage(niyamController
-                                                  .niyamList[index]["image"]),
-                                              height: Get.height * 0.25,
-                                              width: Get.width * 0.25,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 4),
-                                          Text(
-                                            niyamController.niyamList[index]
-                                                ["title"],
-                                            style: const TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 7),
-                                ],
-                              ),
-                            );
-                          }),
-                    )
-                  : Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Center(
-                          child: Column(
-                        children: [
-                          SvgPicture.asset(
-                            "assets/noniyam.svg",
-                            height: Get.height * 0.12,
-                          ),
-                          Text(
-                            "No Niyam Selected",
-                            style: GoogleFonts.poppins(
-                              textStyle: TextStyle(color: Colors.grey),
-                            ),
-                          ),
-                        ],
-                      )),
-                    );
-            }),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
-              child: Text(
-                "remaining niyams",
-                style: GoogleFonts.poppins(
-                  textStyle: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 16),
-                ),
-              ),
-            ),
-            SingleChildScrollView(
-              controller: scrollController,
-              scrollDirection: Axis.horizontal,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Row(
-                  children: [
-                    GestureDetector(
-                      child: Container(
-                        height: 31,
-                        width: 135,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(7),
-                          color: tabIndex == 0
-                              ? const Color(0xff008ABD)
-                              : const Color(0xffEDEDED),
-                        ),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            "નિત્ય ભજન",
-                            style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                                color:
-                                    tabIndex == 0 ? Colors.white : Colors.black,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      onTap: () {
-                        setState(() {
-                          getbymainCategory("bhajan").then((value) {
-                            getcarddata();
-                          });
-                          currentcategory = "bhajan";
-                          tabIndex = 0;
-                        });
-                      },
-                    ),
-                    const SizedBox(width: 8),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          getbymainCategory("sadgranth").then((value) {
-                            getcarddata();
-                          });
-                          // currentcategory = "સદગ્રંથ વાંચન";
-                          currentcategory = "sadgranth";
-
-                          tabIndex = 1;
-                        });
-                      },
-                      child: Container(
-                        height: 31,
-                        width: 135,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(7),
-                          color: tabIndex == 1
-                              ? const Color(0xff008ABD)
-                              : const Color(0xffEDEDED),
-                        ),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            "સદગ્રંથ વાંચન",
-                            style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                                color:
-                                    tabIndex == 1 ? Colors.white : Colors.black,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    const SizedBox(width: 8),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          getbymainCategory("kanthsth").then((value) {
-                            getcarddata();
-                          });
-                          currentcategory = "kanthsth";
-
-                          // currentcategory = "કંઠસ્થ ના નિયમો";
-                          tabIndex = 3;
-                        });
-                        // _pageController.jumpToPage(2);
-                      },
-                      child: Container(
-                        height: 31,
-                        width: 135,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(7),
-                          color: tabIndex == 3
-                              ? const Color(0xff008ABD)
-                              : const Color(0xffEDEDED),
-                        ),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            "કંઠસ્થ ના નિયમો",
-                            style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                                color:
-                                    tabIndex == 3 ? Colors.white : Colors.black,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          getbymainCategory("vachan").then((value) {
-                            getcarddata();
-                          });
-                          tabIndex = 4;
-                          currentcategory = "vachan";
-
-                          // currentcategory = "વાંચન ના નિયમો";
-                        });
-                        // _pageController.jumpToPage(4);
-                      },
-                      child: Container(
-                        height: 31,
-                        width: 135,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(7),
-                          color: tabIndex == 4
-                              ? const Color(0xff008ABD)
-                              : const Color(0xffEDEDED),
-                        ),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            "વાંચન ના નિયમો",
-                            style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                                color:
-                                    tabIndex == 4 ? Colors.white : Colors.black,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: SizedBox(
-                height: Get.height * .6,
-                child: CardSlider(height: Get.height * .6),
+              padding: const EdgeInsets.only(right: 8.0),
+              child: FlutterSwitch(
+                height: 25,
+                width: 50,
+                activeColor: Colors.black,
+                activeTextColor: Colors.white,
+                inactiveColor: Colors.grey,
+                inactiveTextColor: Colors.black,
+                activeText: "ગુ ",
+                inactiveText: "ગુ ",
+                value: status,
+                valueFontSize: 10.0,
+                borderRadius: 30.0,
+                showOnOff: true,
+                onToggle: (val) {
+                  setState(() {
+                    status = val;
+                  });
+                },
               ),
             ),
           ],
-        ),
-      ),
-      floatingActionButton: Obx(() => niyamController.niyamList.isNotEmpty
-          ? Container(
-              height: Get.height * 0.07,
-              width: Get.width * 0.70,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: kPrimarycolor,
+          automaticallyImplyLeading: false,
+          elevation: 0,
+          backgroundColor: Colors.white,
+          leading: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5.0),
+            child: InkWell(
+              onTap: () {
+                Get.back();
+              },
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
               ),
-              child: FloatingActionButton.extended(
-                backgroundColor: kPrimarycolor,
-                onPressed: () async {
-                  Usertaskcontroller usertaskcontroller = Get.find();
-                  usertaskcontroller.usertasklist.forEach((element) {
-                    deletetask(element.id);
-                  });
-                  for (var i = 0; i < niyamController.niyamList.length; i++) {
-                    await addTask(niyamController.niyamList[i]);
-                  }
-                  await getuserid();
-                  usertaskcontroller.getusertask(userid!);
-                  Get.offAll(AppDrawer());
-                },
-                label: const Text(
-                  "આગળ વધો ",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold),
+            ),
+          ),
+          title: Text(
+            "નિયમોની યાદી",
+            style: GoogleFonts.balooBhai(
+              textStyle: const TextStyle(
+                color: Color(0xff008ABD),
+                fontSize: 20,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
+          centerTitle: true,
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 8.0),
+                child: Text(
+                  "Your selected niyams",
+                  style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16),
+                  ),
                 ),
               ),
-            )
-          : Container(
-              // color: Colors.transparent,
-              )),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+              Obx(() {
+                return niyamController.niyamList.isNotEmpty
+                    ? SizedBox(
+                        height: Get.height * 0.17,
+                        width: Get.width,
+                        child: ListView.builder(
+                            itemCount: niyamController.niyamList.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Row(
+                                  children: [
+                                    Bounce(
+                                      duration:
+                                          const Duration(milliseconds: 110),
+                                      onPressed: () {
+                                        showDialog(
+                                          barrierDismissible: false,
+                                          context: context,
+                                          builder: (_) => Dialog(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            backgroundColor: Colors.white,
+                                            insetPadding: const EdgeInsets.only(
+                                                left: 10, right: 10),
+                                            clipBehavior:
+                                                Clip.antiAliasWithSaveLayer,
+                                            child: SizedBox(
+                                              height: Get.height * 0.24,
+                                              width: Get.width * 0.8,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  const SizedBox(height: 10),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      InkWell(
+                                                        onTap: () {
+                                                          Get.back();
+                                                        },
+                                                        child: const Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  right: 12,
+                                                                  top: 1),
+                                                          child: Icon(
+                                                            Icons
+                                                                .cancel_rounded,
+                                                            color: Colors.black,
+                                                            size: 28,
+                                                          ),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                  Text(
+                                                    "Confirmation",
+                                                    style: GoogleFonts.poppins(
+                                                      textStyle: TextStyle(
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 10),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 20, right: 20),
+                                                    child: Text(
+                                                      "Are you sure you want to remove this niyam from list?",
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        textStyle: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 13,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Expanded(
+                                                    child: Align(
+                                                      alignment: Alignment
+                                                          .bottomCenter,
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              GestureDetector(
+                                                                child: InkWell(
+                                                                  onTap: () {
+                                                                    Get.back();
+                                                                    dainikPopupController
+                                                                        .totalTarget
+                                                                        .value = 0;
+                                                                    // print(niyamController
+                                                                    //         .niyamList[
+                                                                    //     index]["id"]);
+
+                                                                    MyCards carddata = MyCards(
+                                                                        maincategory: niyamController.niyamList[index][
+                                                                            "maincategory"],
+                                                                        remaning:
+                                                                            "0",
+                                                                        totallax: niyamController.niyamList[index][
+                                                                            "totalgole"],
+                                                                        heading: niyamController.niyamList[index][
+                                                                            "heading"],
+                                                                        totalmember: niyamController.niyamList[index][
+                                                                            "totalmember"],
+                                                                        color:
+                                                                            "#FAE5E1",
+                                                                        title: niyamController.niyamList[index]
+                                                                            [
+                                                                            "title"],
+                                                                        subTitle:
+                                                                            niyamController.niyamList[index]["subtitle"],
+                                                                        categoryid: niyamController.niyamList[index]["categoryid"],
+                                                                        taskid: niyamController.niyamList[index]["id"].toString(),
+                                                                        images: "assets/Frame.png",
+                                                                        rotate: 0,
+                                                                        opacity: 0,
+                                                                        positionY: 0,
+                                                                        scal: 0);
+                                                                    print(
+                                                                        carddata);
+
+                                                                    niyamController.niyamList[index]["maincategory"] ==
+                                                                            "niyam"
+                                                                        ? dainkLaxDialog(
+                                                                            context,
+                                                                            days,
+                                                                            false,
+                                                                            carddata,
+                                                                            false)
+                                                                        : dainkLaxDialog(
+                                                                            context,
+                                                                            days,
+                                                                            false,
+                                                                            carddata,
+                                                                            true);
+                                                                    // dainkLaxDialog(
+                                                                    //     context,
+                                                                    //     days,
+                                                                    //     false,
+                                                                    //     carddata,
+                                                                    //     true);
+                                                                  },
+                                                                  child:
+                                                                      Container(
+                                                                    height:
+                                                                        Get.height *
+                                                                            0.06,
+                                                                    width:
+                                                                        Get.width *
+                                                                            0.4,
+                                                                    decoration:
+                                                                        const BoxDecoration(
+                                                                      borderRadius:
+                                                                          BorderRadius.only(
+                                                                              bottomLeft: Radius.circular(20)),
+                                                                      color: Color(
+                                                                          0xff008ABD),
+                                                                    ),
+                                                                    child:
+                                                                        Center(
+                                                                      child:
+                                                                          Text(
+                                                                        "Edit",
+                                                                        style: GoogleFonts
+                                                                            .poppins(
+                                                                          textStyle:
+                                                                              TextStyle(
+                                                                            fontWeight:
+                                                                                FontWeight.w500,
+                                                                            fontSize:
+                                                                                16,
+                                                                            color:
+                                                                                Colors.white,
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                onTap: () {
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                },
+                                                              ),
+                                                              GestureDetector(
+                                                                onTap: () {
+                                                                  Get.back();
+                                                                },
+                                                                child: InkWell(
+                                                                  onTap: () {
+                                                                    niyamController
+                                                                        .niyamList
+                                                                        .removeAt(
+                                                                            index);
+                                                                    Navigator.pop(
+                                                                        context);
+                                                                  },
+                                                                  child:
+                                                                      Container(
+                                                                    height:
+                                                                        Get.height *
+                                                                            0.06,
+                                                                    width:
+                                                                        Get.width *
+                                                                            0.4,
+                                                                    decoration:
+                                                                        const BoxDecoration(
+                                                                      borderRadius:
+                                                                          BorderRadius.only(
+                                                                              bottomRight: Radius.circular(20)),
+                                                                      color: Color(
+                                                                          0xffF95050),
+                                                                    ),
+                                                                    child:
+                                                                        Center(
+                                                                      child:
+                                                                          Text(
+                                                                        "Remove",
+                                                                        style: GoogleFonts
+                                                                            .poppins(
+                                                                          textStyle:
+                                                                              TextStyle(
+                                                                            fontWeight:
+                                                                                FontWeight.w500,
+                                                                            fontSize:
+                                                                                16,
+                                                                            color:
+                                                                                Colors.white,
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: Container(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 38,
+                                              backgroundColor:
+                                                  Color(0xffFFF7DE),
+                                              child: Image(
+                                                image: AssetImage(
+                                                    niyamController
+                                                            .niyamList[index]
+                                                        ["image"]),
+                                                height: Get.height * 0.25,
+                                                width: Get.width * 0.25,
+                                              ),
+                                            ),
+                                            const SizedBox(height: 4),
+                                            Text(
+                                              niyamController.niyamList[index]
+                                                  ["title"],
+                                              style: const TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 7),
+                                  ],
+                                ),
+                              );
+                            }),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                            child: Column(
+                          children: [
+                            SvgPicture.asset(
+                              "assets/noniyam.svg",
+                              height: Get.height * 0.12,
+                            ),
+                            Text(
+                              "No Niyam Selected",
+                              style: GoogleFonts.poppins(
+                                textStyle: TextStyle(color: Colors.grey),
+                              ),
+                            ),
+                          ],
+                        )),
+                      );
+              }),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
+                child: Text(
+                  "remaining niyams",
+                  style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16),
+                  ),
+                ),
+              ),
+              SingleChildScrollView(
+                controller: scrollController,
+                scrollDirection: Axis.horizontal,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        child: Container(
+                          height: 31,
+                          width: 135,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(7),
+                            color: tabIndex == 0
+                                ? const Color(0xff008ABD)
+                                : const Color(0xffEDEDED),
+                          ),
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "નિત્ય ભજન",
+                              style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  color: tabIndex == 0
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        onTap: () {
+                          setState(() {
+                            getbymainCategory("bhajan").then((value) {
+                              getcarddata();
+                            });
+                            currentcategory = "bhajan";
+                            tabIndex = 0;
+                          });
+                        },
+                      ),
+                      const SizedBox(width: 8),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            getbymainCategory("sadgranth").then((value) {
+                              getcarddata();
+                            });
+                            // currentcategory = "સદગ્રંથ વાંચન";
+                            currentcategory = "sadgranth";
+
+                            tabIndex = 1;
+                          });
+                        },
+                        child: Container(
+                          height: 31,
+                          width: 135,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(7),
+                            color: tabIndex == 1
+                                ? const Color(0xff008ABD)
+                                : const Color(0xffEDEDED),
+                          ),
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "સદગ્રંથ વાંચન",
+                              style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  color: tabIndex == 1
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      const SizedBox(width: 8),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            getbymainCategory("kanthsth").then((value) {
+                              getcarddata();
+                            });
+                            currentcategory = "kanthsth";
+
+                            // currentcategory = "કંઠસ્થ ના નિયમો";
+                            tabIndex = 3;
+                          });
+                          // _pageController.jumpToPage(2);
+                        },
+                        child: Container(
+                          height: 31,
+                          width: 135,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(7),
+                            color: tabIndex == 3
+                                ? const Color(0xff008ABD)
+                                : const Color(0xffEDEDED),
+                          ),
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "કંઠસ્થ ના નિયમો",
+                              style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  color: tabIndex == 3
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            getbymainCategory("vachan").then((value) {
+                              getcarddata();
+                            });
+                            tabIndex = 4;
+                            currentcategory = "vachan";
+
+                            // currentcategory = "વાંચન ના નિયમો";
+                          });
+                          // _pageController.jumpToPage(4);
+                        },
+                        child: Container(
+                          height: 31,
+                          width: 135,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(7),
+                            color: tabIndex == 4
+                                ? const Color(0xff008ABD)
+                                : const Color(0xffEDEDED),
+                          ),
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "વાંચન ના નિયમો",
+                              style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  color: tabIndex == 4
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: SizedBox(
+                  height: Get.height * .6,
+                  child: CardSlider(height: Get.height * .6),
+                ),
+              ),
+            ],
+          ),
+        ),
+        floatingActionButton: Obx(() => niyamController.niyamList.isNotEmpty
+            ? Container(
+                height: Get.height * 0.07,
+                width: Get.width * 0.70,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: kPrimarycolor,
+                ),
+                child: FloatingActionButton.extended(
+                  backgroundColor: kPrimarycolor,
+                  onPressed: () async {
+                    Usertaskcontroller usertaskcontroller = Get.find();
+                    usertaskcontroller.usertasklist.forEach((element) {
+                      deletetask(element.id);
+                    });
+                    for (var i = 0; i < niyamController.niyamList.length; i++) {
+                      await addTask(niyamController.niyamList[i]);
+                    }
+                    await getuserid();
+                    usertaskcontroller.getusertask(userid!);
+                    Get.offAll(AppDrawer());
+                  },
+                  label: const Text(
+                    "આગળ વધો ",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              )
+            : Container(
+                // color: Colors.transparent,
+                )),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      ),
     );
   }
 }

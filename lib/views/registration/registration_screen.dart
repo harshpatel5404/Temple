@@ -425,6 +425,59 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                 SizedBox(
                   height: Get.height * 0.05,
                 ),
+                // AppButton(
+                //   onPress: () async {
+                //     if (!_formKey.currentState!.validate()) {
+                //       scaffoldMessage(context, "Please Fill all data");
+                //       return;
+                //     } else {
+                //       if (dateinput.text.isNotEmpty || _image != null) {
+                //         Map data = {
+                //           "number": widget.mobileNumber,
+                //           "gender": gender,
+                //           "firstname": namecontroller.text,
+                //           "lastname": surnamecontroller.text,
+                //           "middelname": fathernamecontroller.text,
+                //           "task": "no",
+                //           "dob": dateinput.text,
+                //           "image": _image != null ? _image!.path.toString() : ""
+                //         };
+                //         int loginresponse = await registerUser(data);
+                //         if (0 != loginresponse) {
+                //           await setuserid(loginresponse.toString());
+                //           await setusernumber(widget.mobileNumber);
+                //           await setlogin(true);
+                //           await getallmembercontroller
+                //               .getmemberdata()
+                //               .then((value) {
+                //             print("member list length");
+                //             print(getallmembercontroller.memberlist.length);
+                //             if (getallmembercontroller.memberlist.length != 1) {
+                //               Get.off(SelectMember());
+                //             } else {
+                //               Get.off(Card_Screen(userid: userid,
+                //                                     isback: true,
+
+                //               ));
+                //             }
+                //           });
+                //         } else {
+                //           Fluttertoast.showToast(
+                //               msg: "Your Member Limit Over!",
+                //               backgroundColor: Colors.red,
+                //               gravity: ToastGravity.BOTTOM);
+                //         }
+                //       } else {
+                //         Fluttertoast.showToast(
+                //             msg: "Please select the date",
+                //             backgroundColor: Colors.red,
+                //             gravity: ToastGravity.BOTTOM);
+                //       }
+                //     }
+                //   },
+                //   text: "REGISTER",
+                // ),
+
                 AppButton(
                   onPress: () async {
                     if (!_formKey.currentState!.validate()) {
@@ -435,34 +488,54 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                         Map data = {
                           "number": widget.mobileNumber,
                           "gender": gender,
-                          "firstname": namecontroller.text,
+                          "usernumber": namecontroller.text,
                           "lastname": surnamecontroller.text,
                           "middelname": fathernamecontroller.text,
                           "task": "no",
                           "dob": dateinput.text,
                           "image": _image != null ? _image!.path.toString() : ""
                         };
-                        int loginresponse = await registerUser(data);
-                        if (0 != loginresponse) {
-                          await setuserid(loginresponse.toString());
-                          await setusernumber(widget.mobileNumber);
-                          await setlogin(true);
-                          await getallmembercontroller
-                              .getmemberdata()
-                              .then((value) {
-                            print("member list length");
-                            print(getallmembercontroller.memberlist.length);
-                            if (getallmembercontroller.memberlist.length != 1) {
-                              Get.off(SelectMember());
-                            } else {
-                              Get.off(Card_Screen(userid: userid));
-                            }
-                          });
-                        } else {
+                        Getallmembercontroller getallmembercontroller =
+                            Get.find();
+                        bool membermatch = false;
+                        getallmembercontroller.memberlist.forEach((element) {
+                          if (element.firstname == namecontroller.text) {
+                            membermatch = true;
+                          }
+                        });
+
+                        if (membermatch) {
                           Fluttertoast.showToast(
-                              msg: "Your Member Limit Over!",
+                              msg: "This Member Alreday Exiest!",
                               backgroundColor: Colors.red,
                               gravity: ToastGravity.BOTTOM);
+                        } else {
+                          int loginresponse = await registerUser(data);
+                          if (0 != loginresponse) {
+                            await setuserid(loginresponse.toString());
+                            await setusernumber(widget.mobileNumber);
+                            await setlogin(true);
+                            await getallmembercontroller
+                                .getmemberdata()
+                                .then((value) {
+                              // print("member list length");
+                              // print(getallmembercontroller.memberlist.length);
+                              if (getallmembercontroller.memberlist.length !=
+                                  1) {
+                                Get.off(SelectMember());
+                              } else {
+                                Get.off(Card_Screen(
+                                  userid: userid,
+                                  isback: true,
+                                ));
+                              }
+                            });
+                          } else {
+                            Fluttertoast.showToast(
+                                msg: "Your Member Limit Over!",
+                                backgroundColor: Colors.red,
+                                gravity: ToastGravity.BOTTOM);
+                          }
                         }
                       } else {
                         Fluttertoast.showToast(

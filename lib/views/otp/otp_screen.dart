@@ -5,7 +5,10 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:temple/constant/snack_bar.dart';
+import 'package:temple/services/api/registration_service.dart';
 import 'package:temple/services/notification_service.dart';
+import 'package:temple/views/member/controller/get_member_controller.dart';
+import 'package:temple/views/member/screen/add_member.dart';
 import 'package:temple/views/otp/verify_otp.dart';
 import 'package:temple/widget/app_button.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -177,6 +180,7 @@ class _OtpScreenState extends State<OtpScreen> {
               }
             },
           )
+      
         ],
       ),
     );
