@@ -52,7 +52,6 @@ class RegistrationScreenState extends State<RegistrationScreen> {
   _imgFromCamera() async {
     XFile? image =
         await picker.pickImage(source: ImageSource.camera, imageQuality: 50);
-
     setState(() {
       _image = File(image!.path);
     });
@@ -61,7 +60,6 @@ class RegistrationScreenState extends State<RegistrationScreen> {
   _imgFromGallery() async {
     XFile? image =
         await picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
-
     setState(() {
       _image = File(image!.path);
     });
@@ -445,7 +443,6 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                           "image": _image != null ? _image!.path.toString() : ""
                         };
                         int loginresponse = await registerUser(data);
-
                         if (0 != loginresponse) {
                           await setuserid(loginresponse.toString());
                           await setusernumber(widget.mobileNumber);
