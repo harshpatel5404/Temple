@@ -132,6 +132,12 @@ class _SelectMemberState extends State<SelectMember> {
                                       setuserid(getallmembercontroller
                                           .memberlist[index].id
                                           .toString());
+
+                                      setusername(getallmembercontroller
+                                          .memberlist[index].firstname
+                                          .toString());
+
+                                      setuserindex(index + 1);
                                       usertaskcontroller
                                           .getusertask(getallmembercontroller
                                               .memberlist[index].id

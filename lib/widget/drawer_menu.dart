@@ -17,6 +17,23 @@ class DrawerMenu extends StatefulWidget {
 }
 
 class _DrawerMenuState extends State<DrawerMenu> {
+  var name = "user";
+  var userindex = 1;
+
+  void getData() async {
+    if (await getusername() != null && await getuserindex() != null) {
+      name = (await getusername())!;
+      userindex = (await getuserindex())!;
+      setState(() {});
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   Getallmembercontroller getallmembercontroller =
       Get.put(Getallmembercontroller());
   // bool isSelected = false;
@@ -92,7 +109,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Ghanshyam",
+                    Text(name,
                         style: GoogleFonts.poppins(
                           textStyle: TextStyle(
                               color: Colors.white,
@@ -104,7 +121,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
                     ),
                     Row(
                       children: [
-                        Text("User1",
+                        Text("User" + userindex.toString(),
                             style: GoogleFonts.poppins(
                               textStyle: TextStyle(
                                 color: Colors.white,

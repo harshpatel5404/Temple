@@ -488,6 +488,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                         Map data = {
                           "number": widget.mobileNumber,
                           "gender": gender,
+                          "firstname": namecontroller.text,
                           "usernumber": namecontroller.text,
                           "lastname": surnamecontroller.text,
                           "middelname": fathernamecontroller.text,
@@ -506,7 +507,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
 
                         if (membermatch) {
                           Fluttertoast.showToast(
-                              msg: "This Member Alreday Exiest!",
+                              msg: "This Member Alreday Exists!",
                               backgroundColor: Colors.red,
                               gravity: ToastGravity.BOTTOM);
                         } else {
@@ -524,6 +525,8 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                                   1) {
                                 Get.off(SelectMember());
                               } else {
+                                setuserindex(1);
+                                setusername(namecontroller.text);
                                 Get.off(Card_Screen(
                                   userid: userid,
                                   isback: true,

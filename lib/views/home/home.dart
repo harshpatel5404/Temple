@@ -483,57 +483,58 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                   ),
-                                  index == 1
-                                      ? Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: Get.height * 0.09,
-                                                  left: 35),
-                                              child: Card(
-                                                elevation: 5,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20)),
-                                                child: CircleAvatar(
-                                                  radius: 16,
-                                                  backgroundColor: Colors.white,
-                                                  child: Image.asset(
-                                                    "assets/note.png",
-                                                    color: Colors.red,
-                                                    height: 22,
-                                                    width: 22,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: Get.height * 0.09,
-                                                  left: 5),
-                                              child: Card(
-                                                elevation: 5,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20)),
-                                                child: CircleAvatar(
-                                                  radius: 16,
-                                                  backgroundColor: Colors.white,
-                                                  child: Image.asset(
-                                                    "assets/feature.png",
-                                                    color: Colors.red,
-                                                    height: 22,
-                                                    width: 22,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                      : Padding(
+                                  // index == 1
+                                  //     ? Row(
+                                  //         mainAxisSize: MainAxisSize.min,
+                                  //         children: [
+                                  //           Padding(
+                                  //             padding: EdgeInsets.only(
+                                  //                 top: Get.height * 0.09,
+                                  //                 left: 35),
+                                  //             child: Card(
+                                  //               elevation: 5,
+                                  //               shape: RoundedRectangleBorder(
+                                  //                   borderRadius:
+                                  //                       BorderRadius.circular(
+                                  //                           20)),
+                                  //               child: CircleAvatar(
+                                  //                 radius: 16,
+                                  //                 backgroundColor: Colors.white,
+                                  //                 child: Image.asset(
+                                  //                   "assets/note.png",
+                                  //                   color: Colors.red,
+                                  //                   height: 22,
+                                  //                   width: 22,
+                                  //                 ),
+                                  //               ),
+                                  //             ),
+                                  //           ),
+                                  //           Padding(
+                                  //             padding: EdgeInsets.only(
+                                  //                 top: Get.height * 0.09,
+                                  //                 left: 5),
+                                  //             child: Card(
+                                  //               elevation: 5,
+                                  //               shape: RoundedRectangleBorder(
+                                  //                   borderRadius:
+                                  //                       BorderRadius.circular(
+                                  //                           20)),
+                                  //               child: CircleAvatar(
+                                  //                 radius: 16,
+                                  //                 backgroundColor: Colors.white,
+                                  //                 child: Image.asset(
+                                  //                   "assets/feature.png",
+                                  //                   color: Colors.red,
+                                  //                   height: 22,
+                                  //                   width: 22,
+                                  //                 ),
+                                  //               ),
+                                  //             ),
+                                  //           ),
+                                  //         ],
+                                  //       )
+                                  //     : 
+                                      Padding(
                                           padding: EdgeInsets.only(
                                               top: Get.height * 0.09, left: 35),
                                           child: Card(
@@ -568,7 +569,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Get.to(LevelScreen());
-          Get.to(SelectionScreen());
+          // Get.to(SelectionScreen());
         },
         child: Image.asset("assets/note.png"),
       ),

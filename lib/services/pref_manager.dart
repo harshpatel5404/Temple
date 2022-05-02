@@ -55,3 +55,23 @@ Future<String?> getuserid() async {
   userid = prefs.getString('Userid');
   return prefs.getString('Userid');
 }
+Future setusername(String username) async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setString('username', username);
+}
+
+Future<String?> getusername() async {
+  final prefs = await SharedPreferences.getInstance();
+  return prefs.getString('username');
+}
+
+
+Future setuserindex( userindex) async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setInt('userindex', userindex);
+}
+
+Future<int?> getuserindex() async {
+  final prefs = await SharedPreferences.getInstance();
+  return prefs.getInt('userindex');
+}
